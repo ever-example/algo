@@ -4,12 +4,11 @@
 using namespace std;
 
 int fib(int n);
-std::vector<int> fibs;
 
 int main() {
 
 	int n;
-	cout << "Enter which Fib. # to compute for" << endl;
+	cout << "Enter which Fib. # to compute for: ";
 	cin >> n;
 
 	cout << "The number you entered was: " << n << endl;
@@ -17,12 +16,15 @@ int main() {
 }
 
 int fib(int n) {
-	if (n <= 2) {
-		return 1;
-	} else if (n < fibs.size()) {
-		return fibs.at(n);
+	static std::vector<int> fibs;
+	int num;
+	if (n < fibs.size()) {
+		return fibs.at(n-1);
+	} else if (n <= 2) {
+		num = 1;
 	} else {
-		int num = fibs.at(n-1) + fibs.at(n-2);
-		return num;
+		num = fib(n-1) + fib(n-2);
 	}
+	fibs.push_back(num);
+	return num;
 }
